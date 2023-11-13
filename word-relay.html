@@ -14,31 +14,66 @@
     <button>입력</button>
 
     <script>
-      //   prompt는 사용자에게 입력받는 팝업
-      const number = parseInt(prompt("몇 명이 참가하나요?"), 10);
+      // //   prompt는 사용자에게 입력받는 팝업
+      // const number = parseInt(prompt("몇 명이 참가하나요?"), 10);
 
-      // alert는 알림창을 띄움
-      alert(number + "명입니다.");
+      // // alert는 알림창을 띄움
+      // alert(number + "명입니다.");
 
-      // confirm은 사용자에게 확인과 취소를 입력받는 방법
-      const yesOrno = confirm("확실해요?");
+      // // confirm은 사용자에게 확인과 취소를 입력받는 방법
+      // const yesOrno = confirm("확실해요?");
 
-      // 이런식으로 input이 동작되면 뒤의 function이 실행된다.
-      document.querySelector("input").addEventListener("input", function () {
-        console.log("글자 입력");
-      });
+      // // 이런식으로 input이 동작되면 뒤의 function이 실행된다.
+      // document.querySelector("input").addEventListener("input", function () {
+      //   console.log("글자 입력");
+      // });
 
-      // function을 따로 빼서 넣을 수도 있다.
+      // document.querySelector("button").addEventListener("click", (event) => {
+      //   console.log("버튼 클릭", event.target.value);
+      // });
 
-      document.querySelector("button").addEventListener("click", (event) => {
-        console.log("버튼 클릭", event.target.value);
-      });
+      // // 클래스를 찾는 것 클래스이름 앞에 .으로 찾는다.
 
-      // 클래스를 찾는 것 클래스이름 앞에 .으로 찾는다.
+      // // id로 찾을 때는 id 앞에 #을 붙여준다.
 
-      // id로 찾을 때는 id 앞에 #을 붙여준다.
+      // // 태그로 찾을때는 따옴표 안에 넣어준다.
 
-      // 태그로 찾을때는 따옴표 안에 넣어준다.
+      const number = Number(prompt("몇 명이 참가하나요?"));
+      const $button = document.querySelector("button");
+      const $input = document.querySelector("input");
+      const $word = document.querySelector("#word");
+      const $order = document.querySelector("#order");
+      let word; // 제시어
+      let newWord; // 새로이 입력한 단어
+
+      const onClickButton = () => {
+        if (!word || word[word.length - 1] === newWord[0]) {
+          // 제시어가 비어있는 경우
+          word = newWord; // 입력한 단어가 제시어가 된다.
+          $word.textContent = word;
+
+          const order = Number($order.textContent);
+
+          // 순서 넘기기
+          if (order + 1 > number) {
+            $order.textContent = 1;
+          } else {
+            $order.textContent = order + 1;
+          }
+        } else {
+          // 끝말잇기가 올바르지 않는 경우
+          alert("올바르지 않은 단어입니다!");
+        }
+        $input.value = "";
+        $input.focus;
+      };
+
+      const onInput = (event) => {
+        newWord = event.target.value;
+      };
+
+      $button.addEventListener("click", onClickButton);
+      $input.addEventListener("input", onInput);
     </script>
   </body>
 </html>
